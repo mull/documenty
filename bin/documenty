@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+require 'subcommand'
+require 'yaml_parser'
+require 'html_producer'
+
+
+usage_string = <<-EOF
+Documenty Yaml API Parser 0.1
+
+Usage:
+  documenty input_file [output_directory]
+
+Options:
+  input_file: The .yml file to be parsed
+  output_file: The directory that documenty should put its output in.
+                    default output directory: ./documenty_doc/index.html
+EOF
+
+options = {
+  output_directory: "./documenty_doc/index.html"
+}
+
+if ARGV.length < 1
+  puts usage_string
+  exit
+else
+  options[:input_file] = ARGV[0]
+  options[:output_directory] = ARGV[1] if ARGV[1]
+end
+
+yap = Documenty::YamlAPIParser.new(options[:input_file])
+
+if yap.valid?
+  Documenty::HTMLProducer.produce(yap.attributes, options[:output_directory])
+else
+  puts "There were errors in your YAML file: "
+  yap.errors.each do |error|
+    what = error[1].keys.join('#')
+    message = error[1].values.join(', ')
+    puts "\t#{what} #{error[0]}: #{message}"
+  end
+end
