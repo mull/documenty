@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require 'subcommand'
 require 'yaml_parser'
 require 'html_producer'
 
@@ -13,11 +12,11 @@ Usage:
 Options:
   input_file: The .yml file to be parsed
   output_file: The directory that documenty should put its output in.
-                    default output directory: ./documenty_doc/index.html
+                    default output directory: ./apidoc/index.html
 EOF
 
 options = {
-  output_directory: "./documenty_doc/index.html"
+  output_directory: "./apidoc/index.html"
 }
 
 if ARGV.length < 1

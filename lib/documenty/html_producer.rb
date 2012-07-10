@@ -12,19 +12,18 @@ module Documenty
             )
 
             doc.title {
-              doc.text attributes[:base]["Name"]
+              doc.text attributes[:base]["name"]
             }
           }
           doc.body {
             doc.header {
               doc.h1 {
-                doc.text attributes[:base]["Name"]
+                doc.text attributes[:base]["name"]
               }
             }
 
             doc.div(:id => 'content') {
-              attributes[:resources].each do |resource, quick_description|
-                description = attributes[:descriptions][resource]
+              attributes[:resources].each do |resource, description|
 
                 doc.div(:class => 'resource', :id => "resource-#{resource}") {
                   doc.h2 {
@@ -32,7 +31,7 @@ module Documenty
                   }
 
                   doc.p {
-                    doc.text description["what"]
+                    doc.text description["description"]
                   }
 
                   doc.table.actions {
@@ -56,7 +55,7 @@ module Documenty
                           }
 
                           doc.td(:class => "action-what") {
-                            doc.text keys["what"]
+                            doc.text keys["description"]
                           }
                         }
                       end
@@ -69,9 +68,9 @@ module Documenty
         }
       end
 
-      f = File.new(output_directory, "w+")
-      f << builder.to_html
-      f.close
+      File.open(output_directory, "w+") do |f|
+        f << builder.to_html
+      end
     end
   end
 end

@@ -7,7 +7,7 @@ module Documenty
     # These fields are required, Documently will yield an error
     # if one of them is not present.
     REQUIRED_FIELDS = [
-      "Name", "Version", "Path Prefix"
+      "name", "version", "path prefix"
     ]
 
     DEFAULT_METHODS = {
@@ -23,7 +23,6 @@ module Documenty
     def initialize(yaml_file)
       @base = {}
       @resources = {}
-      @descriptions = {}
       @errors = {
       }
       @valid = true
@@ -36,14 +35,12 @@ module Documenty
 
       parse_base
       parse_resources
-      parse_descriptions
     end
 
     def attributes
       {
         base: @base,
-        resources: @resources,
-        descriptions: @descriptions
+        resources: @resources
       }
     end
 
@@ -64,7 +61,7 @@ module Documenty
     end
 
     def parse_base
-      @base = @yaml["Base"]
+      @base = @yaml["base"]
       REQUIRED_FIELDS.each do |field|
         unless @base[field]
           add_error(:base, "is missing", field)
@@ -73,18 +70,9 @@ module Documenty
     end
 
     def parse_resources
-      resources = @yaml["Resources"].split(', ')
-      @resources = resources
-    end
+      @resources = @yaml["resources"]
 
-    def parse_descriptions
-      @descriptions = @yaml["Descriptions"]
-      missing_descriptions = @resources - @descriptions.keys
-      missing_descriptions.each do |missing_description|
-        add_error(:descriptions, "is missing", missing_description)
-      end
-
-      @descriptions.each do |resource, resource_keys|
+      @resources.each do |resource, resource_keys|
         resource_keys["actions"].each do |action, action_keys|
           unless action_keys["method"]
             if DEFAULT_METHODS.include? action

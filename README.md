@@ -54,11 +54,20 @@ To generate an HTML file with descriptions of your API simply specify the input 
 which Documenty should write the files. The output directory defaults to ./documenty_doc/.
 
 ```
+Documenty Yaml API Parser 0.1
+
 Usage:
   documenty input_file [output_directory]
 
 Options:
   input_file: The .yml file to be parsed
   output_file: The directory that documenty should put its output in.
-                    default output directory: ./documenty_doc/index.html
+                    default output directory: ./apidoc/index.html
 ```
+
+# TODO
+1. Response codes and response objects (feel free to suggest a nice way to do this by opening an issue)
+2. Nested resources
+
+# Contributing
+Bug reports, pull requests and general feedback are always welcome!

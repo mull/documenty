@@ -8,13 +8,11 @@ Gem::Specification.new do |s|
   s.authors     = ["Emil Ahlbäck"]
   s.email       = 'e.ahlback@gmail.com'
   s.files       = [
+    "lib/documenty.rb",
     "lib/documenty/yaml_parser.rb",
     "lib/documenty/html_producer.rb"
   ]
-  s.require_paths = ["lib/documenty"]
+  s.require_paths = ["lib/documenty", "lib/"]
   s.homepage    =
     'https://github.com/pushly/documenty'
-
-  s.add_runtime_dependency 'subcommand'
-  s.add_development_dependency 'subcommand'
 end
