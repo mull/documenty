@@ -6,43 +6,43 @@ Documenty constists of two things:
 ## Example .yml file
 ```yml
 ---
-Base:
-  Name: Pushly REST JSON API
-  Version: 1
-  Path Prefix: http://push.ly/api/business/v1
+base:
+  name: Pushly REST JSON API
+  version: 1
+  path prefix: http://push.ly/api/business/v1
   
-
-Resources: Customer, Package
-
-Descriptions:
-  Customer:
-    what: Add, delete and inspect your business' customers.
+resources:
+  customers:
+    description: Add, delete and inspect your business' customers.
     actions:
       index:
-        path: "/customers"
-        what: Returns a list of your business' customers
+        path: /customers
+        description: Returns a list of your business' customers
       show:
-        path: "/customers/:id"
-        what: Returns information about a particular customer
+        path: /customers/:id
+        description: Returns information about a particular customer
+        parameters:
+          id: The id of the customer
       create:
-        path: "/customers"
-        what: Create a new customer associated with your business
-  Package:
-    what: Add, delete and inspec your business' packages.
+        path: /customers
+        description: Create a new customer associated with your business
+  packages:
+    description: Add, delete and inspec your business' packages.
     actions:
       index:
-        path: "/customers"
-        what: Returns a list of your business' customers
+        path: /customers
+        description: Returns a list of your business' customers
       custom_action:
-        method: "GET"
-        path: "/customers/:id/custom_action"
-        what: Does <something> to a customer
+        method: GET
+        path: /customers/:id/custom_action
+        description: Does <something> to a customer
+        parameters:
+          id: The id of the customer
 ```
 Documenty demands a few things:
 
 1. A name, a version and a path prefix. The path prefix is prefixed to every path specified
-2. A list of resources
-3. Each resource needs a description and documenty will spew out errors if something is missing
+2. Each resource needs a description and documenty will spew out errors if something is missing
 
 Normal RESTful actions (index/show/create/update/destroy) do not need a method specified, Documenty assumes that they
 are accessed through get/get/post/put/delete respectively. Said default methods can be overwritten by simply specifying
