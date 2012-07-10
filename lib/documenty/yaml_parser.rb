@@ -7,7 +7,7 @@ module Documenty
     # These fields are required, Documently will yield an error
     # if one of them is not present.
     REQUIRED_FIELDS = [
-      "name", "version", "path prefix"
+      "name", "version", "url"
     ]
 
     DEFAULT_METHODS = {

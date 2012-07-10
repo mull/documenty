@@ -9,7 +9,7 @@ Documenty constists of two things:
 base:
   name: Pushly REST JSON API
   version: 1
-  path prefix: http://push.ly/api/business/v1
+  url: http://push.ly/api/business/v1
   
 resources:
   customers:

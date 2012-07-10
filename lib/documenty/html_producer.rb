@@ -1,7 +1,9 @@
 require 'nokogiri'
+require 'fileutils'
+
 module Documenty
   class HTMLProducer
-    def self.produce(attributes, output_directory)
+    def self.produce(attributes, output_file)
       builder = Nokogiri::HTML::Builder.new do |doc|
         doc.html {
           doc.head {
@@ -51,7 +53,7 @@ module Documenty
                           doc.td(:class => "action-path") {
                             doc.text keys["method"]
                             doc.text " "
-                            doc.text keys["path"]
+                            doc.text "#{attributes[:base]['url']}/#{keys['path']}"
                           }
 
                           doc.td(:class => "action-what") {
@@ -68,7 +70,12 @@ module Documenty
         }
       end
 
-      File.open(output_directory, "w+") do |f|
+      # Create the directories necessary to create our output
+      # TODO: Handle exceptions
+      FileUtils::mkdir_p( File.dirname(output_file) )
+
+
+      File.open(output_file, "w+") do |f|
         f << builder.to_html
       end
     end
