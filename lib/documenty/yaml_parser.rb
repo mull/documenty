@@ -39,8 +39,8 @@ module Documenty
 
     def attributes
       {
-        base: @base,
-        resources: @resources
+        "base" => @base,
+        "resources" => @resources
       }
     end
 
