@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'yaml_parser'
-require 'html_producer'
+require 'renderer'
 
 
 usage_string = <<-EOF
@@ -12,11 +12,11 @@ Usage:
 Options:
   input_file: The .yml file to be parsed
   output_file: The directory that documenty should put its output in.
-                    default output directory: ./apidoc/index.html
+                    default output directory: ./apidoc/
 EOF
 
 options = {
-  output_directory: "./apidoc/index.html"
+  output_directory: "./apidoc"
 }
 
 if ARGV.length < 1
@@ -30,7 +30,7 @@ end
 yap = Documenty::YamlAPIParser.new(options[:input_file])
 
 if yap.valid?
-  Documenty::HTMLProducer.produce(yap.attributes, options[:output_directory])
+  Documenty::Renderer.render(yap.attributes, {:output_directory => options[:output_directory]})
 else
   puts "There were errors in your YAML file: "
   yap.errors.each do |error|

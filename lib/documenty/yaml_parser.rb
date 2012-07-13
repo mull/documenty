@@ -23,8 +23,8 @@ module Documenty
     def initialize(yaml_file)
       @base = {}
       @resources = {}
-      @errors = {
-      }
+      @errors = {}
+      @required_response_objects = [] # Response objects that have been referenced
       @valid = true
 
       unless File.exists? yaml_file
@@ -35,6 +35,7 @@ module Documenty
 
       parse_base
       parse_resources
+      #parse_response_objects
     end
 
     def attributes
@@ -80,6 +81,10 @@ module Documenty
             else
               add_error(:descriptions, "does not specify a HTTP method", resource, action)
             end
+          end
+
+          if action_keys["response_object"] || action_keys["response_objects"]
+            @required_response_objects
           end
         end
       end

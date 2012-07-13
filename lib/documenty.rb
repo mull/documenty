@@ -1,2 +1,2 @@
 require 'yaml_parser'
-require 'html_producer'
+require 'renderer'

@@ -1,0 +1,36 @@
+!!! 5
+%html
+  %head
+    %title 
+      = @base["name"]
+    %link{rel: "stylesheet", type: "text/css", href: stylesheet_path}
+    %meta(charset="utf-8")
+  %body
+
+    %header
+      %h1
+        = @base["name"]
+
+    #content
+      - @resources.each do |resource, description|
+        .resource(id="resource-#{resource}")
+          %h2
+            = resource
+
+          %p
+            = description["description"]
+
+          %table.actions
+            %thead
+              %th Resource
+              %th Description
+            %tbody
+              - description["actions"].each do |action, keys|
+                %tr.resource_action
+                  %td.action_path
+                    %a{:href => link_for_action(keys)}
+                      = keys["method"]
+                      = keys["path"]
+
+                  %td.action_description
+                    = keys["description"]

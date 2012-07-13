@@ -10,12 +10,14 @@ Gem::Specification.new do |s|
   s.files       = [
     "lib/documenty.rb",
     "lib/documenty/yaml_parser.rb",
-    "lib/documenty/html_producer.rb",
-    "lib/documenty/resource_html_producer.rb"
+    "lib/documenty/renderer.rb",
+    "templates/index.haml",
+    "templates/resource.haml",
+    "templates/style.css"
   ]
   s.require_paths = ["lib/documenty", "lib/"]
   s.homepage    =
     'https://github.com/pushly/documenty'
 
-  s.add_runtime_dependency 'nokogiri'
+  s.add_runtime_dependency 'haml'
 end

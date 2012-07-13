@@ -1,0 +1,41 @@
+!!! 5
+%html
+  %head
+    %title 
+      = @name
+    %link{rel: "stylesheet", type: "text/css", href: stylesheet_path}
+    %meta(charset="utf-8")
+  %body
+
+
+  #content
+    %h2 
+      = @attributes["path"]
+
+    %h3 Parameters
+    - if @attributes["parameters"]
+      %table.parameter_list
+        %thead
+          %th Name
+          %th Description
+
+        %tbody
+          - @attributes["parameters"].each do |name, description|
+            %tr
+              %td
+                = name
+              %td
+                = description
+
+  #sidebar.resource
+    %h4 Resource Information
+
+    %table.info
+      %tbody
+        %tr
+          %td Requires authentication?
+          %td Yes
+        %tr
+          %td HTTP Methods
+          %td
+            = @attributes["method"]
